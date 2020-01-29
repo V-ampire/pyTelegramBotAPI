@@ -52,13 +52,11 @@ class ApiHelper(object):
         :return: The result parsed to a JSON dictionary.
         """
         base_url = self.API_URL
-
         if base_url is None:
             request_url = "https://api.telegram.org/bot{0}/{1}".format(token, method_name)
         else:
             request_url = base_url.format(token, method_name)
             
-        request_url = base_url.format(token, method_name)
         logger.debug("Request: method={0} url={1} params={2} files={3}".format(method, request_url, params, files))
         read_timeout = self.READ_TIMEOUT
         connect_timeout = self.CONNECT_TIMEOUT
@@ -67,6 +65,7 @@ class ApiHelper(object):
         if params:
             if 'timeout' in params: read_timeout = params['timeout'] + 10
             if 'connect-timeout' in params: connect_timeout = params['connect-timeout'] + 10
+        # logger.debug(self._get_req_session())
         result = self._get_req_session().request(method, request_url, params=params, files=files,
                                             timeout=(connect_timeout, read_timeout), proxies=self.proxy)
         logger.debug("The server returned: '{0}'".format(result.text.encode('utf8')))
