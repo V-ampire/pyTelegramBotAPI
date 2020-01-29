@@ -20,7 +20,7 @@ from telebot import util
 logger = telebot.logger
 
 
-class Apihelper(object):
+class ApiHelper(object):
     """Class for making requests"""
 
     def __init__(self, **kwargs):
