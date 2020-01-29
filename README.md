@@ -496,18 +496,26 @@ telebot.logger.setLevel(logging.DEBUG) # Outputs debug messages to console.
 
 ### Proxy
 
-You can use proxy for request. `apihelper.proxy` object will use by call `requests` proxies argument.
+You can use proxy for request.
 
 ```python
-from telebot import apihelper
+import telebot
 
-apihelper.proxy = {'http':'http://10.10.1.10:3128'}
+
+proxy = {'http':'http://10.10.1.10:3128'}
+
+bot = telebot("TOKEN", proxy=proxy)
 ```
 
 If you want to use socket5 proxy you need install dependency `pip install requests[socks]` and make sure, that you have the latest version of `gunicorn`, `PySocks`, `pyTelegramBotAPI`, `requests` and `urllib3`.
 
 ```python
-apihelper.proxy = {'https':'socks5://userproxy:password@proxy_address:port'}
+import telebot
+
+
+proxy = {'https':'socks5://userproxy:password@proxy_address:port'}
+
+bot = telebot("TOKEN", proxy=proxy)
 ```
 
 

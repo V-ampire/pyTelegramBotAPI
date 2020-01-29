@@ -38,7 +38,7 @@ class ApiHelper(object):
         self.READ_TIMEOUT = kwargs.get('read_timeout', 9999)
 
     def _get_req_session(self, reset=False):
-    return util.per_thread('req_session', lambda: requests.session(), reset)
+        return util.per_thread('req_session', lambda: requests.session(), reset)
 
 
     def _make_request(self, token, method_name, method='get', params=None, files=None):
