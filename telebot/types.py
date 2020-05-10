@@ -226,12 +226,16 @@ class Chat(JsonDeserializable):
             pinned_message = Message.de_json(obj['pinned_message'])
         sticker_set_name = obj.get('sticker_set_name')
         can_set_sticker_set = obj.get('can_set_sticker_set')
+        permissions = None
+        if 'permissions' in obj:
+            permissions = ChatPermissions.de_json(obj['permissions'])
         return cls(id, type, title, username, first_name, last_name, all_members_are_administrators,
-                   photo, description, invite_link, pinned_message, sticker_set_name, can_set_sticker_set)
+                   photo, description, invite_link, pinned_message, sticker_set_name, can_set_sticker_set,
+                   permissions)
 
     def __init__(self, id, type, title=None, username=None, first_name=None, last_name=None,
                  all_members_are_administrators=None, photo=None, description=None, invite_link=None,
-                 pinned_message=None, sticker_set_name=None, can_set_sticker_set=None):
+                 pinned_message=None, sticker_set_name=None, can_set_sticker_set=None, permissions=None):
         self.type = type
         self.last_name = last_name
         self.first_name = first_name
@@ -1027,6 +1031,33 @@ class ChatMember(JsonDeserializable):
         self.can_send_media_messages = can_send_media_messages
         self.can_send_other_messages = can_send_other_messages
         self.can_add_web_page_previews = can_add_web_page_previews
+
+
+class ChatPermissions(JsonDeserializable):
+    @classmethod
+    def de_json(cls, json_type):
+        can_change_info = obj.get('can_change_info')
+        can_invite_users = obj.get('can_invite_users')
+        can_pin_messages = obj.get('can_pin_messages')
+        can_send_messages = obj.get('can_send_messages')
+        can_send_media_messages = obj.get('can_send_media_messages')
+        can_send_polls = obj.get('can_send_polls')
+        can_send_other_messages = obj.get('can_send_other_messages')
+        can_add_web_page_previews = obj.get('can_add_web_page_previews')
+        return cls(can_change_info, can_invite_users, can_pin_messages, can_send_messages, 
+                    can_send_media_messages, can_send_polls, can_send_other_messages, can_add_web_page_previews)
+
+    def __init__(can_change_info, can_invite_users, can_pin_messages, can_send_messages, 
+                    can_send_media_messages, can_send_polls, can_send_other_messages, can_add_web_page_previews):
+        self.can_change_info = can_change_info
+        self.can_invite_users = can_invite_users
+        self.can_pin_messages = can_pin_messages
+        self.can_send_messages = can_send_messages
+        self.can_send_media_messages = can_send_media_messages
+        self.can_send_other_messages = can_send_other_messages
+        self.can_send_polls = can_send_polls
+        self.can_add_web_page_previews = can_add_web_page_previews
+
 
 
 # InlineQuery
