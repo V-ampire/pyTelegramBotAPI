@@ -1048,7 +1048,7 @@ class ChatPermissions(JsonDeserializable):
         return cls(can_change_info, can_invite_users, can_pin_messages, can_send_messages, 
                     can_send_media_messages, can_send_polls, can_send_other_messages, can_add_web_page_previews)
 
-    def __init__(can_change_info, can_invite_users, can_pin_messages, can_send_messages, 
+    def __init__(self, can_change_info, can_invite_users, can_pin_messages, can_send_messages, 
                     can_send_media_messages, can_send_polls, can_send_other_messages, can_add_web_page_previews):
         self.can_change_info = can_change_info
         self.can_invite_users = can_invite_users
