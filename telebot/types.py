@@ -1036,6 +1036,7 @@ class ChatMember(JsonDeserializable):
 class ChatPermissions(JsonDeserializable):
     @classmethod
     def de_json(cls, json_type):
+        obj = cls.check_json(json_type)
         can_change_info = obj.get('can_change_info')
         can_invite_users = obj.get('can_invite_users')
         can_pin_messages = obj.get('can_pin_messages')
