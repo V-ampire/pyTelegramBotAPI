@@ -249,6 +249,7 @@ class Chat(JsonDeserializable):
         self.pinned_message = pinned_message
         self.sticker_set_name = sticker_set_name
         self.can_set_sticker_set = can_set_sticker_set
+        self.permissions = permissions
 
 
 class Message(JsonDeserializable):
